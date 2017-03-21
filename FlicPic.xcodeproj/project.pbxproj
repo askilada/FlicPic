@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1EB113E01E81B69E0049DAE3 /* FPCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EB113DF1E81B69E0049DAE3 /* FPCore.framework */; };
+		1EB113E11E81B69E0049DAE3 /* FPCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1EB113DF1E81B69E0049DAE3 /* FPCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F4741CC11E8186290044946A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4741CC01E8186290044946A /* AppDelegate.swift */; };
 		F4741CC31E8186290044946A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4741CC21E8186290044946A /* ViewController.swift */; };
 		F4741CC61E8186290044946A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4741CC41E8186290044946A /* Main.storyboard */; };
@@ -25,7 +27,22 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		1EB113E21E81B69E0049DAE3 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				1EB113E11E81B69E0049DAE3 /* FPCore.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		1EB113DF1E81B69E0049DAE3 /* FPCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FPCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4741CBD1E8186290044946A /* FlicPic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlicPic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4741CC01E8186290044946A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F4741CC21E8186290044946A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -43,6 +60,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1EB113E01E81B69E0049DAE3 /* FPCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -59,6 +77,7 @@
 		F4741CB41E8186280044946A = {
 			isa = PBXGroup;
 			children = (
+				1EB113DF1E81B69E0049DAE3 /* FPCore.framework */,
 				F4741CBF1E8186290044946A /* FlicPic */,
 				F4741CD41E8186290044946A /* FlicPicTests */,
 				F4741CBE1E8186290044946A /* Products */,
@@ -106,6 +125,7 @@
 				F4741CB91E8186290044946A /* Sources */,
 				F4741CBA1E8186290044946A /* Frameworks */,
 				F4741CBB1E8186290044946A /* Resources */,
+				1EB113E21E81B69E0049DAE3 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -406,6 +426,7 @@
 				F4741CDC1E8186290044946A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F4741CDD1E8186290044946A /* Build configuration list for PBXNativeTarget "FlicPicTests" */ = {
 			isa = XCConfigurationList;
@@ -414,6 +435,7 @@
 				F4741CDF1E8186290044946A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
