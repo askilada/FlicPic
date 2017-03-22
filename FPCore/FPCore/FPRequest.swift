@@ -8,7 +8,11 @@
 
 import Foundation
 
+public typealias FPResponse = (Error?, Any?) -> Void
 
+public enum FPRequestError: Error {
+    case InternalError
+}
 
 public class FPRequest {
     public typealias Params = Dictionary<String, String>
@@ -21,7 +25,7 @@ public class FPRequest {
     var format = "json"
     var nojsoncallback = "1"
     
-    public init() {
+    internal init() {
         let core = FPCore.shared
         self.api_key = core.apiKey
         self.secret = core.apiSecret
@@ -83,7 +87,7 @@ public class FPRequest {
         return query
     }
     
-    public func exec() {
+    public func exec(response: FPResponse) {
         
         let params = makeParams()
         let query = paramsToString(params)
@@ -91,6 +95,9 @@ public class FPRequest {
         let url = NSURL(string: "\(self.endpoint)?\(query)")!
         print(url)
         
+        
+        
+        response(FPRequestError.InternalError, nil)
     }
     
 }
@@ -103,4 +110,14 @@ public class FPAuthRequest: FPRequest {
         super.init()
         self.method = "flickr.auth.getFullToken"
     }
+}
+
+public class FPPublicPhotosRequest: FPRequest {
+    public override init()
+    {
+        super.init()
+        
+        self.endpoint = "https://api.flickr.com/services/feeds/photos_public.gne"
+    }
+    
 }

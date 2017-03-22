@@ -28,7 +28,7 @@ public class FPCore {
     public static let shared: FPCore = FPCore();
     let apiKey = FPConfig.apiKey
     let apiSecret = FPConfig.apiSecret
-    let authUrl = "https://www.flickr.com/auth-72157678250365384"
+    public let authUrl = "https://www.flickr.com/auth-72157678250365384" 
     public var sign: FPMD5Hash!
     
 }

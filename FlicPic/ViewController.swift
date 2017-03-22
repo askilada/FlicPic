@@ -14,8 +14,10 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let req = FPAuthRequest(miniToken: "454-200-900")
-        req.exec()
+        let req = FPPublicPhotosRequest()
+        req.exec(response: {(error, response) in
+            
+        })
         
         // Do any additional setup after loading the view, typically from a nib.
     }
