@@ -10,6 +10,7 @@
 		1EB113D71E81B5340049DAE3 /* FPCore.h in Headers */ = {isa = PBXBuildFile; fileRef = 1EB113D51E81B5340049DAE3 /* FPCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1EB113DE1E81B57F0049DAE3 /* FPCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB113DD1E81B57F0049DAE3 /* FPCore.swift */; };
 		1EB113E41E81C3390049DAE3 /* FPRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB113E31E81C3390049DAE3 /* FPRequest.swift */; };
+		F4C08BD91E82CFF700656EF0 /* FPCore+Dic.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C08BD81E82CFF700656EF0 /* FPCore+Dic.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -18,6 +19,7 @@
 		1EB113D61E81B5340049DAE3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1EB113DD1E81B57F0049DAE3 /* FPCore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FPCore.swift; sourceTree = "<group>"; };
 		1EB113E31E81C3390049DAE3 /* FPRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FPRequest.swift; sourceTree = "<group>"; };
+		F4C08BD81E82CFF700656EF0 /* FPCore+Dic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FPCore+Dic.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +56,7 @@
 				1EB113DD1E81B57F0049DAE3 /* FPCore.swift */,
 				1EB113D61E81B5340049DAE3 /* Info.plist */,
 				1EB113E31E81C3390049DAE3 /* FPRequest.swift */,
+				F4C08BD81E82CFF700656EF0 /* FPCore+Dic.swift */,
 			);
 			path = FPCore;
 			sourceTree = "<group>";
@@ -140,6 +143,7 @@
 			files = (
 				1EB113E41E81C3390049DAE3 /* FPRequest.swift in Sources */,
 				1EB113DE1E81B57F0049DAE3 /* FPCore.swift in Sources */,
+				F4C08BD91E82CFF700656EF0 /* FPCore+Dic.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -303,6 +307,7 @@
 				1EB113DC1E81B5340049DAE3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

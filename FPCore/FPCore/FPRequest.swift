@@ -13,36 +13,80 @@ public class FPRequest {
     public typealias Params = Dictionary<String, String>
     public var endpoint = "https://api.flickr.com/services/rest/"
     public var method = ""
-    public var params = Params()
+    var params = Params()
+    var ignore = ["endpoint", "secret"]
+    var api_key: String
+    var secret: String
+    var format = "json"
+    var nojsoncallback = "1"
+    
+    public init() {
+        let core = FPCore.shared
+        self.api_key = core.apiKey
+        self.secret = core.apiSecret
+    }
     
     public subscript (key:String) -> String {
         get {
-            return self.params[key]!
+            return self.params[key]! as! String
         }
         set {
             self.params[key] = newValue
         }
     }
+    func addIgnore(_ property:String) {
+        self.ignore.append(property)
+    }
+    func getChildren(children: Mirror.Children) -> Params {
+        var p = Params()
+        for child in children {
+            let key = child.label!
+            if(ignore.contains(key)) { continue }
+            
+            p[key] = child.value as? String
+        }
+        
+        return p
+    }
     
+    
+    public func exec() {
+        let m = Mirror(reflecting: self)
+        let props = getChildren(children: m.children)
+        var requestProps:[String:String] = [:]
+        
+        if let ms = m.superclassMirror {
+            let superProps = getChildren(children: ms.children)
+            requestProps = superProps.mergeWith(dic: props)
+        }
+        
+        var keys = Array(requestProps.keys).sorted { (s1, s2) -> Bool in
+            if(s1.lowercased() < s2.lowercased())
+            {
+                return true
+            }
+            return false
+        }
+        
+        let sorted = requestProps.sorted(by: {$0.0 < $1.0})
+        
+        print(sorted)
+        
+        
+        
+    }
     
 }
 
 public class FPAuthRequest: FPRequest {
-    var miniToken: String {
-        get {
-            return self["mini_token"]
-        }
-        set {
-            self["mini_token"] = newValue
-        }
-    }
+    var mini_token: String
     
-    
-    init(miniToken:String) {
+    public init(miniToken: String) {
+        
+        self.mini_token = miniToken
         super.init()
-        self.miniToken = miniToken
-        self.method = "flickr.auth.getFullToken"
-        // self.addAllowd(["field1", "field2"])
+
+        self.method = "test.echo.flickr"
     }
 }
 
