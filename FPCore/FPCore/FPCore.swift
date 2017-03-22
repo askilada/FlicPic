@@ -20,11 +20,15 @@ public enum FPEndpoint {
     case Authenticate
 }
 
+public protocol FPMD5Hash {
+    func make(input:String) -> String
+}
+
 public class FPCore {
     public static let shared: FPCore = FPCore();
-    let apiKey = "3f5d55a13807a363e539fa157affdc74"
-    let apiSecret = "a468ca3c91577070"
+    let apiKey = ""
+    let apiSecret = ""
     let authUrl = "https://www.flickr.com/auth-72157678250365384"
-        
+    public var sign: FPMD5Hash!
     
 }

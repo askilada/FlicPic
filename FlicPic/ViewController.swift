@@ -14,7 +14,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let req = FPAuthRequest(miniToken: "123-123-123")
+        let req = FPAuthRequest(miniToken: "454-200-900")
         req.exec()
         
         // Do any additional setup after loading the view, typically from a nib.

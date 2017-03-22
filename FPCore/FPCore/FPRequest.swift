@@ -9,6 +9,7 @@
 import Foundation
 
 
+
 public class FPRequest {
     public typealias Params = Dictionary<String, String>
     public var endpoint = "https://api.flickr.com/services/rest/"
@@ -50,6 +51,7 @@ public class FPRequest {
     }
     
     
+    
     public func exec() {
         let m = Mirror(reflecting: self)
         let props = getChildren(children: m.children)
@@ -69,10 +71,22 @@ public class FPRequest {
         }
         
         let sorted = requestProps.sorted(by: {$0.0 < $1.0})
+        var stringToSign = self.secret
+        var finalQuery:[String] = []
+        for (key, value) in sorted {
+            stringToSign.append("\(key)\(value)")
+            finalQuery.append("\(key)=\(value)")
+        }
         
-        print(sorted)
+        print(stringToSign)
+        var signed = FPCore.shared.sign.make(input: stringToSign)
+        print(signed)
+        finalQuery.append("api_sig=\(signed)")
         
+        let query = finalQuery.joined(separator: "&")
         
+        let url = NSURL(string: "\(self.endpoint)?\(query)")!
+        print(url)
         
     }
     
@@ -82,11 +96,9 @@ public class FPAuthRequest: FPRequest {
     var mini_token: String
     
     public init(miniToken: String) {
-        
         self.mini_token = miniToken
         super.init()
-
-        self.method = "test.echo.flickr"
+        self.method = "flickr.auth.getFullToken"
     }
 }
 
