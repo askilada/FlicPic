@@ -50,9 +50,7 @@ public class FPRequest {
         return p
     }
     
-    
-    
-    public func exec() {
+    public func makeParams() -> Params {
         let m = Mirror(reflecting: self)
         let props = getChildren(children: m.children)
         var requestProps:[String:String] = [:]
@@ -62,15 +60,13 @@ public class FPRequest {
             requestProps = superProps.mergeWith(dic: props)
         }
         
-        var keys = Array(requestProps.keys).sorted { (s1, s2) -> Bool in
-            if(s1.lowercased() < s2.lowercased())
-            {
-                return true
-            }
-            return false
-        }
+        return requestProps as Params
+    }
+    
+    func paramsToString(_ params: Params) -> String{
+
         
-        let sorted = requestProps.sorted(by: {$0.0 < $1.0})
+        let sorted = params.sorted(by: {$0.0 < $1.0})
         var stringToSign = self.secret
         var finalQuery:[String] = []
         for (key, value) in sorted {
@@ -82,8 +78,15 @@ public class FPRequest {
         var signed = FPCore.shared.sign.make(input: stringToSign)
         print(signed)
         finalQuery.append("api_sig=\(signed)")
-        
         let query = finalQuery.joined(separator: "&")
+        
+        return query
+    }
+    
+    public func exec() {
+        
+        let params = makeParams()
+        let query = paramsToString(params)
         
         let url = NSURL(string: "\(self.endpoint)?\(query)")!
         print(url)
@@ -101,36 +104,3 @@ public class FPAuthRequest: FPRequest {
         self.method = "flickr.auth.getFullToken"
     }
 }
-
-
-/*
-public protocol FPRequest {
-    var endpoint: String {get}
-    var method: String {get}
-    var auth: FPToken? {get set}
-    func exec()
-}
-
-extension FPRequest {
-    public func exec() {
-        
-        
-        
-        
-        
-        
-    }
-}
-
-public class FCAuthRequest: FPRequest {
-    public var auth: FPToken?
-    public let endpoint: String = "https://api.flickr.com/services/rest/"
-    public let method: String = "flickr.auth.getFullToken"
-    public let mini_token: String
-    public let nojsoncallback: Int = 1
-    
-    public init(miniToken:String) {
-        self.mini_token = miniToken
-    }
-}
- */
