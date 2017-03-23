@@ -16,6 +16,7 @@
 		F4741CC81E8186290044946A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F4741CC71E8186290044946A /* Assets.xcassets */; };
 		F4741CCB1E8186290044946A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4741CC91E8186290044946A /* LaunchScreen.storyboard */; };
 		F4741CD61E8186290044946A /* FlicPicTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4741CD51E8186290044946A /* FlicPicTests.swift */; };
+		F4991FB91E8425080028414C /* PhotosCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4991FB81E8425080028414C /* PhotosCollectionViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +57,7 @@
 		F4741CD11E8186290044946A /* FlicPicTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FlicPicTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4741CD51E8186290044946A /* FlicPicTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlicPicTests.swift; sourceTree = "<group>"; };
 		F4741CD71E8186290044946A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F4991FB81E8425080028414C /* PhotosCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotosCollectionViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +110,7 @@
 		F4741CBF1E8186290044946A /* FlicPic */ = {
 			isa = PBXGroup;
 			children = (
+				F4991FB71E8424CC0028414C /* Views */,
 				1EB113E61E82FC920049DAE3 /* utils */,
 				F4741CC01E8186290044946A /* AppDelegate.swift */,
 				F4741CC21E8186290044946A /* ViewController.swift */,
@@ -126,6 +129,14 @@
 				F4741CD71E8186290044946A /* Info.plist */,
 			);
 			path = FlicPicTests;
+			sourceTree = "<group>";
+		};
+		F4991FB71E8424CC0028414C /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F4991FB81E8425080028414C /* PhotosCollectionViewController.swift */,
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -235,6 +246,7 @@
 				1EB113E91E82FCC20049DAE3 /* MD5Sign.swift in Sources */,
 				F4741CC31E8186290044946A /* ViewController.swift in Sources */,
 				F4741CC11E8186290044946A /* AppDelegate.swift in Sources */,
+				F4991FB91E8425080028414C /* PhotosCollectionViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -153,10 +153,10 @@ public class FPPublicPhotosRequest: FPRequest {
         
         var photos: [FPPhoto] = []
         for item in items {
-            let photo = FPPhoto();
-            photo.title = item["title"] as! String
-            photo.author = item["author"] as! String
-            photos.append(photo)
+            if let photo = FPPhoto(json: item) {
+                photos.append(photo)
+            }
+            
         }
         
         print(photos)
