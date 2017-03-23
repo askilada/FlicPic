@@ -8,9 +8,10 @@
 
 import UIKit
 import FPCore
+import PKHUD
 
 private let reuseIdentifier = "Cell"
-private let sectionInsets = UIEdgeInsets(top: 50.0, left: 20.0, bottom: 50.0, right: 20.0)
+private let sectionInsets = UIEdgeInsets(top: 50.0, left: 10.0, bottom: 50.0, right: 10.0)
 private let itemsPerRow: CGFloat = 3
 
 
@@ -46,17 +47,25 @@ class PhotosCollectionViewController: UICollectionViewController {
         
         
         let req = FPPublicPhotosRequest()
+        PKHUD.sharedHUD.contentView = PKHUDProgressView()
+        PKHUD.sharedHUD.show()
         req.exec { (err, photos) in
             
             if err != nil {
                 //TODO: error check
+                DispatchQueue.main.async {
+                    PKHUD.sharedHUD.contentView = PKHUDErrorView(title: "Error", subtitle: "An error had happend")
+                    PKHUD.sharedHUD.hide(afterDelay: 2)
+                }
                 return
             }
             
             
             let photos = photos as? [FPPhoto]
             self.photos = photos!
+            
             DispatchQueue.main.async {
+                PKHUD.sharedHUD.hide()
                 self.collectionView?.reloadData()
             }
             
@@ -113,6 +122,27 @@ class PhotosCollectionViewController: UICollectionViewController {
         return cell
     }
 
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let cell = collectionView.cellForItem(at: indexPath) as! PhotosCollectionViewCell
+        let image = cell.imageView.image
+        
+        let imageView = UIImageView(image: image)
+        imageView.contentMode = .scaleAspectFit
+        imageView.backgroundColor = .black
+        imageView.isUserInteractionEnabled = true
+        
+        let tab = UITapGestureRecognizer(target: self, action: #selector(dismissImageView(sender:)))
+        imageView.addGestureRecognizer(tab)
+        
+        imageView.frame = self.view.frame
+        self.view.addSubview(imageView)
+        
+    }
+    
+    func dismissImageView(sender: UITapGestureRecognizer) {
+        sender.view?.removeFromSuperview()
+    }
+    
     // MARK: UICollectionViewDelegate
 
     /*

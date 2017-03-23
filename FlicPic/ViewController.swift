@@ -9,17 +9,13 @@
 import UIKit
 import FPCore
 
+
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
         
-        let req = FPPublicPhotosRequest()
-        req.exec(response: {(error, response) in
-            
-        })
-        
-        // Do any additional setup after loading the view, typically from a nib.
     }
 
     override func didReceiveMemoryWarning() {
