@@ -10,4 +10,7 @@
    <FileRef
       location = "group:FlicPic.xcodeproj">
    </FileRef>
+   <FileRef
+      location = "group:PKHUD/PKHUD.xcodeproj">
+   </FileRef>
 </Workspace>
