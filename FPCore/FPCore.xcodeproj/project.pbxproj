@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1E9509EA1E8468F400823C4B /* FPStoreToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9509E91E8468F400823C4B /* FPStoreToken.swift */; };
+		1E9509ED1E846A0700823C4B /* FPPublicPhotosRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9509EC1E846A0700823C4B /* FPPublicPhotosRequest.swift */; };
+		1E9509EF1E846A2400823C4B /* FPAuthRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9509EE1E846A2400823C4B /* FPAuthRequest.swift */; };
 		1EB113D71E81B5340049DAE3 /* FPCore.h in Headers */ = {isa = PBXBuildFile; fileRef = 1EB113D51E81B5340049DAE3 /* FPCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1EB113DE1E81B57F0049DAE3 /* FPCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB113DD1E81B57F0049DAE3 /* FPCore.swift */; };
 		1EB113E41E81C3390049DAE3 /* FPRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB113E31E81C3390049DAE3 /* FPRequest.swift */; };
@@ -16,6 +19,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1E9509E91E8468F400823C4B /* FPStoreToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FPStoreToken.swift; sourceTree = "<group>"; };
+		1E9509EC1E846A0700823C4B /* FPPublicPhotosRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FPPublicPhotosRequest.swift; sourceTree = "<group>"; };
+		1E9509EE1E846A2400823C4B /* FPAuthRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FPAuthRequest.swift; sourceTree = "<group>"; };
 		1EB113D21E81B5340049DAE3 /* FPCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FPCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1EB113D51E81B5340049DAE3 /* FPCore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FPCore.h; sourceTree = "<group>"; };
 		1EB113D61E81B5340049DAE3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -38,6 +44,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1E9509E81E8468C000823C4B /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				1E9509E91E8468F400823C4B /* FPStoreToken.swift */,
+			);
+			name = Utils;
+			sourceTree = "<group>";
+		};
+		1E9509EB1E8469D600823C4B /* Requests */ = {
+			isa = PBXGroup;
+			children = (
+				1EB113E31E81C3390049DAE3 /* FPRequest.swift */,
+				1E9509EE1E846A2400823C4B /* FPAuthRequest.swift */,
+				1E9509EC1E846A0700823C4B /* FPPublicPhotosRequest.swift */,
+			);
+			name = Requests;
+			sourceTree = "<group>";
+		};
 		1EB113C81E81B5340049DAE3 = {
 			isa = PBXGroup;
 			children = (
@@ -57,11 +81,12 @@
 		1EB113D41E81B5340049DAE3 /* FPCore */ = {
 			isa = PBXGroup;
 			children = (
+				1E9509EB1E8469D600823C4B /* Requests */,
+				1E9509E81E8468C000823C4B /* Utils */,
 				F4C08BDC1E83A65C00656EF0 /* Models */,
 				1EB113D51E81B5340049DAE3 /* FPCore.h */,
 				1EB113DD1E81B57F0049DAE3 /* FPCore.swift */,
 				1EB113D61E81B5340049DAE3 /* Info.plist */,
-				1EB113E31E81C3390049DAE3 /* FPRequest.swift */,
 				F4C08BD81E82CFF700656EF0 /* FPCore+Dic.swift */,
 				1EB113E51E82F4440049DAE3 /* Bridge.h */,
 				1EB113EB1E8306AE0049DAE3 /* Config.swift */,
@@ -159,9 +184,12 @@
 			files = (
 				1EB113E41E81C3390049DAE3 /* FPRequest.swift in Sources */,
 				1EB113EC1E8306AE0049DAE3 /* Config.swift in Sources */,
+				1E9509ED1E846A0700823C4B /* FPPublicPhotosRequest.swift in Sources */,
 				1EB113DE1E81B57F0049DAE3 /* FPCore.swift in Sources */,
+				1E9509EA1E8468F400823C4B /* FPStoreToken.swift in Sources */,
 				F4C08BDB1E83A65700656EF0 /* FPPhoto.swift in Sources */,
 				F4C08BD91E82CFF700656EF0 /* FPCore+Dic.swift in Sources */,
+				1E9509EF1E846A2400823C4B /* FPAuthRequest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

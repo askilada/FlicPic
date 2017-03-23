@@ -8,15 +8,19 @@
 
 import Foundation
 
-public class FPPhoto {
-    var title:String!
-    var author:String!
-    var authorId:String!
-    var dateTaken:String!
-    var published: String!
-    var media: FPPhotoMedia!
+public protocol FPModel {
+    init?(json: [String: Any])
+}
+
+public class FPPhoto: FPModel {
+    public private(set) var title:String!
+    public private(set) var author:String!
+    public private(set) var authorId:String!
+    public private(set) var dateTaken:String!
+    public private(set) var published: String!
+    public private(set) var media: FPPhotoMedia!
     
-    public init?(json: [String: Any]) {
+    public required init?(json: [String: Any]) {
         guard let title = json["title"] as? String,
             let author = json["author"] as? String,
             let authorId = json["author_id"] as? String,
@@ -39,7 +43,7 @@ public class FPPhoto {
 }
 
 public struct FPPhotoMedia {
-    var m:String!
+    public private(set) var m:String!
     
     public init(json: [String: Any]) {
         self.m = json["m"] as? String

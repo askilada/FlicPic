@@ -13,18 +13,59 @@ private let reuseIdentifier = "Cell"
 private let sectionInsets = UIEdgeInsets(top: 50.0, left: 20.0, bottom: 50.0, right: 20.0)
 private let itemsPerRow: CGFloat = 3
 
+
+extension UIImageView {
+    func loadImageFrom(url: URL) {
+        
+        let request = URLRequest(url: url, cachePolicy: .returnCacheDataElseLoad, timeoutInterval: 1200)
+        
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
+            if error != nil {
+                print(error!)
+                return
+            }
+            
+            DispatchQueue.main.async {
+                let image =  UIImage(data: data!)
+                self.image = image
+            }
+            
+        }.resume()
+        
+    }
+}
+
+
+
 class PhotosCollectionViewController: UICollectionViewController {
-    var images: [FPPhoto]?
+    var photos: [FPPhoto] = []
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        let req = FPPublicPhotosRequest()
+        req.exec { (err, photos) in
+            
+            if err != nil {
+                //TODO: error check
+                return
+            }
+            
+            
+            let photos = photos as? [FPPhoto]
+            self.photos = photos!
+            DispatchQueue.main.async {
+                self.collectionView?.reloadData()
+            }
+            
+        } 
+        
+        
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
-
-        // Register cell classes
-        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
 
         // Do any additional setup after loading the view.
     }
@@ -54,13 +95,18 @@ class PhotosCollectionViewController: UICollectionViewController {
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
-        return 10
+        return self.photos.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! PhotosCollectionViewCell
     
         // Configure the cell
+        let index = indexPath.row
+        let photo = photos[index]
+        
+        let url = URL(string: photo.media.m)!
+        cell.imageView.loadImageFrom(url: url)
         
         cell.backgroundColor = UIColor.blue
     
@@ -76,12 +122,12 @@ class PhotosCollectionViewController: UICollectionViewController {
     }
     */
 
-    /*
+    
     // Uncomment this method to specify if the specified item should be selected
     override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
         return true
     }
-    */
+    
 
     /*
     // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item

@@ -16,7 +16,7 @@ public enum FPRequestError: Error {
 }
 
 protocol FPRequestable {
-    func requestResponse(jsonObject:[String:Any]) throws
+    func requestResponse(jsonObject:[String:Any]) throws -> (Any?)
 }
 
 public class FPRequest: FPRequestable {
@@ -120,7 +120,7 @@ public class FPRequest: FPRequestable {
         task.resume()
     }
     
-    func requestResponse(jsonObject: [String : Any]) throws {
+    func requestResponse(jsonObject: [String : Any]) throws -> (Any?) {
         throw FPRequestError.NotImplementet
     }
     
@@ -128,41 +128,4 @@ public class FPRequest: FPRequestable {
 }
 
 
-public class FPAuthRequest: FPRequest {
-    var mini_token: String
-    
-    public init(miniToken: String) {
-        self.mini_token = miniToken
-        super.init()
-        self.method = "flickr.auth.getFullToken"
-    }
-}
 
-public class FPPublicPhotosRequest: FPRequest {
-    public override init()
-    {
-        super.init()
-        
-        self.endpoint = "https://api.flickr.com/services/feeds/photos_public.gne"
-    }
-    
-    override func requestResponse(jsonObject: [String : Any]) throws {
-        print("Response json public")
-        
-        let items = jsonObject["items"] as! [[String: Any]]
-        
-        var photos: [FPPhoto] = []
-        for item in items {
-            if let photo = FPPhoto(json: item) {
-                photos.append(photo)
-            }
-            
-        }
-        
-        print(photos)
-        
-        
-        
-    }
-    
-}
