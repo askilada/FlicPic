@@ -8,13 +8,18 @@
 
 import Foundation
 
-public typealias FPResponse = (Error?, Any?) -> Void
+public typealias FPResponseHandler = (Error?, Any?) -> Void
 
 public enum FPRequestError: Error {
     case InternalError
+    case NotImplementet
 }
 
-public class FPRequest {
+protocol FPRequestable {
+    func requestResponse(jsonObject:[String:Any]) throws
+}
+
+public class FPRequest: FPRequestable {
     public typealias Params = Dictionary<String, String>
     public var endpoint = "https://api.flickr.com/services/rest/"
     public var method = ""
@@ -87,20 +92,41 @@ public class FPRequest {
         return query
     }
     
-    public func exec(response: FPResponse) {
+    public func exec(response: @escaping FPResponseHandler) {
         
         let params = makeParams()
         let query = paramsToString(params)
         
-        let url = NSURL(string: "\(self.endpoint)?\(query)")!
+        let url = URL(string: "\(self.endpoint)?\(query)")!
         print(url)
         
+        var request = URLRequest(url: url)
         
         
-        response(FPRequestError.InternalError, nil)
+        let task = URLSession.shared.dataTask(with: request) { (data, urlresponse, err) in
+            if err != nil {
+                return response(err, nil)
+            }
+            do {
+                let jsonObject = try JSONSerialization.jsonObject(with: data!, options: []) as! [String: Any]
+                let responseObj = try self.requestResponse(jsonObject: jsonObject)
+                return response(nil, responseObj)
+            }
+            catch
+            {
+                return response(error, nil)
+            }   
+        }
+        task.resume()
     }
     
+    func requestResponse(jsonObject: [String : Any]) throws {
+        throw FPRequestError.NotImplementet
+    }
+    
+    
 }
+
 
 public class FPAuthRequest: FPRequest {
     var mini_token: String
@@ -118,6 +144,25 @@ public class FPPublicPhotosRequest: FPRequest {
         super.init()
         
         self.endpoint = "https://api.flickr.com/services/feeds/photos_public.gne"
+    }
+    
+    override func requestResponse(jsonObject: [String : Any]) throws {
+        print("Response json public")
+        
+        let items = jsonObject["items"] as! [[String: Any]]
+        
+        var photos: [FPPhoto] = []
+        for item in items {
+            let photo = FPPhoto();
+            photo.title = item["title"] as! String
+            photo.author = item["author"] as! String
+            photos.append(photo)
+        }
+        
+        print(photos)
+        
+        
+        
     }
     
 }
