@@ -11,7 +11,14 @@ import FPCore
 
 
 class ViewController: UIViewController {
-
+    
+    @IBAction func loginAction(sender: UIButton) {
+        let urlStr = FPCore.shared.authUrl
+        let url = URL(string: urlStr)!
+        
+        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

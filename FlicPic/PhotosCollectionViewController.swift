@@ -52,7 +52,6 @@ class PhotosCollectionViewController: UICollectionViewController {
         req.exec { (err, photos) in
             
             if err != nil {
-                //TODO: error check
                 DispatchQueue.main.async {
                     PKHUD.sharedHUD.contentView = PKHUDErrorView(title: "Error", subtitle: "An error had happend")
                     PKHUD.sharedHUD.hide(afterDelay: 2)
@@ -123,6 +122,9 @@ class PhotosCollectionViewController: UICollectionViewController {
     }
 
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        //TODO: Maybe load bigger image in future
+        
+        
         let cell = collectionView.cellForItem(at: indexPath) as! PhotosCollectionViewCell
         let image = cell.imageView.image
         

@@ -30,5 +30,19 @@ public class FPCore {
     let apiSecret = FPConfig.apiSecret
     public let authUrl = "https://www.flickr.com/auth-72157678250365384" 
     public var sign: FPMD5Hash!
+    public var token: FPToken?
+    
+    init() {
+        if let token = UserDefaults.standard.string(forKey: "token")
+            , let userId = UserDefaults.standard.string(forKey: "userId")
+            , let userName = UserDefaults.standard.string(forKey: "userName") {
+            
+            let t = FPToken(authToken: token, userId: userId, userName: userName)
+            self.token = t
+        }
+        
+    }
+    
+    
     
 }
