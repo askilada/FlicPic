@@ -19,15 +19,23 @@ public class FPAuthRequest: FPRequest {
     
     
     override func requestResponse(jsonObject: [String : Any]) throws -> (Any?) {
+        print(jsonObject)
+        if let stat = jsonObject["stat"] as? String, let msg = jsonObject["message"] as? String, stat == "fail" {
+            print(msg)
+            throw FPRequestError.WrongMiniToken
+        }
         
-        guard let auth = jsonObject["auth"] as? [String:String]
-            , let user = jsonObject["user"] as? [String:String] else {
+        
+        
+        guard let auth = jsonObject["auth"] as? [String:Any]
+            , let user = auth["user"] as? [String:String]
+            , let token = auth["token"] as? [String:String] else {
             throw FPRequestError.InternalError
         }
         
         
-        let token = FPToken(authToken: auth["_content"]!, userId: user["nsid"]!, userName: user["username"]!)
-        FPCore.shared.token = token
+        let t = FPToken(authToken: token["_content"]!, userId: user["nsid"]!, userName: user["username"]!)
+        FPCore.shared.token = t
         
         return token
     }

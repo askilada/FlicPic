@@ -12,6 +12,7 @@ public typealias FPResponseHandler = (Error?, Any?) -> Void
 
 public enum FPRequestError: Error {
     case InternalError
+    case WrongMiniToken
     case NotImplementet
 }
 
@@ -107,6 +108,10 @@ public class FPRequest: FPRequestable {
             if err != nil {
                 return response(err, nil)
             }
+            let httpResponse = urlresponse as! HTTPURLResponse
+            
+            
+            
             do {
                 let jsonObject = try JSONSerialization.jsonObject(with: data!, options: []) as! [String: Any]
                 let responseObj = try self.requestResponse(jsonObject: jsonObject)
