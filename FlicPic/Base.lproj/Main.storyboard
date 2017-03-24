@@ -63,9 +63,6 @@
                                                 <constraint firstItem="Txt-ed-R2L" firstAttribute="leading" secondItem="Llf-2p-qV1" secondAttribute="leadingMargin" id="zhk-Fg-ERJ"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="0ag-s2-zOC" kind="show" identifier="private_images" id="BvC-QA-Gs1"/>
-                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="WX8-6w-AAw">
                                         <rect key="frame" x="0.0" y="144" width="375" height="44"/>
@@ -91,6 +88,9 @@
                                                 <constraint firstItem="cOr-mK-YJS" firstAttribute="centerY" secondItem="z88-Sx-pTH" secondAttribute="centerY" id="p6q-RD-KRI"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="Ege-rA-knq" kind="show" id="WlZ-md-sU8"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="tgh-Vn-zE8">
                                         <rect key="frame" x="0.0" y="188" width="375" height="44"/>
@@ -250,7 +250,42 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Nse-FC-gnE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="976.79999999999995" y="363.86806596701655"/>
+            <point key="canvasLocation" x="1097" y="658"/>
+        </scene>
+        <!--Map View Controller-->
+        <scene sceneID="iuY-ps-J3j">
+            <objects>
+                <viewController id="Ege-rA-knq" customClass="MapViewController" customModule="FlicPic" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="QvL-cC-OYS"/>
+                        <viewControllerLayoutGuide type="bottom" id="hzY-UB-w0v"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="diJ-kQ-29z">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" pitchEnabled="NO" showsUserLocation="YES" showsBuildings="NO" showsPointsOfInterest="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OoD-0t-oao">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <connections>
+                                    <outlet property="delegate" destination="Ege-rA-knq" id="r9G-HG-f1r"/>
+                                </connections>
+                            </mapView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="OoD-0t-oao" firstAttribute="top" secondItem="QvL-cC-OYS" secondAttribute="bottom" id="EAS-nb-yuD"/>
+                            <constraint firstItem="hzY-UB-w0v" firstAttribute="top" secondItem="OoD-0t-oao" secondAttribute="bottom" id="iJv-yu-c2g"/>
+                            <constraint firstAttribute="trailing" secondItem="OoD-0t-oao" secondAttribute="trailing" id="nmg-4U-tsa"/>
+                            <constraint firstItem="OoD-0t-oao" firstAttribute="leading" secondItem="diJ-kQ-29z" secondAttribute="leading" id="xxu-yH-MOU"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="mapView" destination="OoD-0t-oao" id="o9f-cn-UEO"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Qrw-Fc-eOM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2031" y="18"/>
         </scene>
         <!--Photos Collection View Controller-->
         <scene sceneID="V8m-Vi-Srg">
@@ -322,7 +357,4 @@
             <point key="canvasLocation" x="-844" y="96.7016491754123"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="BvC-QA-Gs1"/>
-    </inferredMetricsTieBreakers>
 </document>
