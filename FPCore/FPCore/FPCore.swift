@@ -30,7 +30,13 @@ public class FPCore {
     let apiSecret = FPConfig.apiSecret
     public let authUrl = "https://www.flickr.com/auth-72157678250365384" 
     public var sign: FPMD5Hash!
-    public var token: FPToken?
+    public var token: FPToken? {
+        didSet {
+            if let token = token {
+                self.store(token: token, inDefaults: UserDefaults.standard)
+            }
+        }
+    }
     
     init() {
         if let token = UserDefaults.standard.string(forKey: "token")
@@ -40,6 +46,13 @@ public class FPCore {
             let t = FPToken(authToken: token, userId: userId, userName: userName)
             self.token = t
         }
+        
+    }
+    
+    func store(token: FPToken, inDefaults defaults: UserDefaults) {
+        defaults.set(token.authToken, forKey: "token")
+        defaults.set(token.userId, forKey: "userId")
+        defaults.set(token.userName, forKey: "userName")
         
     }
     

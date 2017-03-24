@@ -37,15 +37,52 @@ extension UIImageView {
 }
 
 
+enum PhotosToLoad {
+    case Public
+    case Private
+}
 
 class PhotosCollectionViewController: UICollectionViewController {
     var photos: [FPPhoto] = []
     
     
+    
+    
+    func loadImages(ofType type: PhotosToLoad) {
+        let request: FPRequest
+        switch type {
+        case .Public:
+            request = FPPublicPhotosRequest()
+            break
+        case .Private:
+            request = FPPrivatePhotosRequest()
+            break
+        }
+        
+        PKHUD.sharedHUD.contentView = PKHUDProgressView()
+        request.exec { (err, result) in
+            if err != nil {
+                DispatchQueue.main.async {
+                    PKHUD.sharedHUD.contentView = PKHUDErrorView(title: "Error", subtitle: "An error had happend")
+                    PKHUD.sharedHUD.hide(afterDelay: 2)
+                }
+                return
+            }
+            
+            let photos = result as! [FPPhoto]
+            self.photos = photos
+            
+            DispatchQueue.main.async {
+                PKHUD.sharedHUD.hide()
+                self.collectionView?.reloadData()
+            }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        /*
         let req = FPPublicPhotosRequest()
         PKHUD.sharedHUD.contentView = PKHUDProgressView()
         PKHUD.sharedHUD.show()
@@ -70,7 +107,7 @@ class PhotosCollectionViewController: UICollectionViewController {
             
         } 
         
-        
+        */
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false

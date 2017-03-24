@@ -8,17 +8,17 @@
 
 import Foundation
 
-class FPPrivatePhotosRequest: FPRequest {
+public class FPPrivatePhotosRequest: FPRequest {
     public private(set) var user_id = "me"
-    public private(set) var privacy_filter = "privacy_filter"
+    public private(set) var privacy_filter = "5"
     public private(set) var auth_token: String!
     
-    override init() {
+    override public init() {
         super.init()
         self.method = "flickr.photos.search"
     }
     
-    override func exec(response: @escaping FPResponseHandler) {
+    override public func exec(response: @escaping FPResponseHandler) {
         let token = FPCore.shared.token
         if token == nil {
             response(FPRequestError.InternalError, nil)
@@ -28,5 +28,9 @@ class FPPrivatePhotosRequest: FPRequest {
         self.auth_token = token!.authToken
         
         super.exec(response: response)
+    }
+    
+    override func requestResponse(jsonObject: [String : Any]) throws -> (Any?) {
+        return ""
     }
 }
