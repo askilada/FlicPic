@@ -32,9 +32,7 @@ public class FPCore {
     public var sign: FPMD5Hash!
     public var token: FPToken? {
         didSet {
-            if let token = token {
-                self.store(token: token, inDefaults: UserDefaults.standard)
-            }
+            self.store(token: token, inDefaults: UserDefaults.standard)
         }
     }
     
@@ -49,12 +47,20 @@ public class FPCore {
         
     }
     
-    func store(token: FPToken, inDefaults defaults: UserDefaults) {
-        defaults.set(token.authToken, forKey: "token")
-        defaults.set(token.userId, forKey: "userId")
-        defaults.set(token.userName, forKey: "userName")
+    func store(token: FPToken?, inDefaults defaults: UserDefaults) {
+        if let token = token {
+            defaults.set(token.authToken, forKey: "token")
+            defaults.set(token.userId, forKey: "userId")
+            defaults.set(token.userName, forKey: "userName")
+        } else {
+            defaults.removeObject(forKey: "token")
+            defaults.removeObject(forKey: "userId")
+            defaults.removeObject(forKey: "userName")
+        }
         
     }
+    
+    
     
     
     

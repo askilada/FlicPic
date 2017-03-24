@@ -10,12 +10,13 @@ import Foundation
 
 public class FPPrivatePhotosRequest: FPRequest {
     public private(set) var user_id = "me"
-    public private(set) var privacy_filter = "5"
+    public private(set) var extras = "url_sq,url_t,url_s,url_q,url_m,url_n,url_z,url_c,url_l,url_o,owner_name,date_taken,date_upload"
     public private(set) var auth_token: String!
     
     override public init() {
         super.init()
         self.method = "flickr.photos.search"
+        
     }
     
     override public func exec(response: @escaping FPResponseHandler) {
@@ -31,6 +32,21 @@ public class FPPrivatePhotosRequest: FPRequest {
     }
     
     override func requestResponse(jsonObject: [String : Any]) throws -> (Any?) {
-        return ""
+        
+        guard let data = jsonObject["photos"] as? [String: Any]
+            , let photos = data["photo"] as? [[String: Any]] else {
+            throw FPRequestError.InternalError
+        }
+        
+        let p = photos.map { (photo) -> FPPhoto in
+            let f = FPPhoto(json: photo)
+            return f!
+        }
+        
+        return p as! Any?
+        
+        
+        
+        
     }
 }

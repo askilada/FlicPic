@@ -37,6 +37,6 @@ public class FPAuthRequest: FPRequest {
         let t = FPToken(authToken: token["_content"]!, userId: user["nsid"]!, userName: user["username"]!)
         FPCore.shared.token = t
         
-        return token
+        return t as Any?
     }
 }

@@ -60,11 +60,13 @@ class PhotosCollectionViewController: UICollectionViewController {
         }
         
         PKHUD.sharedHUD.contentView = PKHUDProgressView()
+        PKHUD.sharedHUD.show()
         request.exec { (err, result) in
             if err != nil {
                 DispatchQueue.main.async {
                     PKHUD.sharedHUD.contentView = PKHUDErrorView(title: "Error", subtitle: "An error had happend")
                     PKHUD.sharedHUD.hide(afterDelay: 2)
+                    self.navigationController?.popViewController(animated: true)
                 }
                 return
             }
@@ -152,8 +154,6 @@ class PhotosCollectionViewController: UICollectionViewController {
         
         let url = URL(string: photo.media.m)!
         cell.imageView.loadImageFrom(url: url)
-        
-        cell.backgroundColor = UIColor.blue
     
         return cell
     }
