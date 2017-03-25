@@ -11,6 +11,8 @@
 		1E9509ED1E846A0700823C4B /* FPPublicPhotosRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9509EC1E846A0700823C4B /* FPPublicPhotosRequest.swift */; };
 		1E9509EF1E846A2400823C4B /* FPAuthRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9509EE1E846A2400823C4B /* FPAuthRequest.swift */; };
 		1E9509F41E847FEA00823C4B /* FPPrivatePhotosRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9509F31E847FEA00823C4B /* FPPrivatePhotosRequest.swift */; };
+		1E9509FA1E85E9DA00823C4B /* FPMapPhotosRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9509F91E85E9D900823C4B /* FPMapPhotosRequest.swift */; };
+		1E9509FC1E85F06800823C4B /* FPMapPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9509FB1E85F06700823C4B /* FPMapPhoto.swift */; };
 		1EB113D71E81B5340049DAE3 /* FPCore.h in Headers */ = {isa = PBXBuildFile; fileRef = 1EB113D51E81B5340049DAE3 /* FPCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1EB113DE1E81B57F0049DAE3 /* FPCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB113DD1E81B57F0049DAE3 /* FPCore.swift */; };
 		1EB113E41E81C3390049DAE3 /* FPRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB113E31E81C3390049DAE3 /* FPRequest.swift */; };
@@ -24,6 +26,8 @@
 		1E9509EC1E846A0700823C4B /* FPPublicPhotosRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FPPublicPhotosRequest.swift; sourceTree = "<group>"; };
 		1E9509EE1E846A2400823C4B /* FPAuthRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FPAuthRequest.swift; sourceTree = "<group>"; };
 		1E9509F31E847FEA00823C4B /* FPPrivatePhotosRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FPPrivatePhotosRequest.swift; sourceTree = "<group>"; };
+		1E9509F91E85E9D900823C4B /* FPMapPhotosRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FPMapPhotosRequest.swift; sourceTree = "<group>"; };
+		1E9509FB1E85F06700823C4B /* FPMapPhoto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FPMapPhoto.swift; sourceTree = "<group>"; };
 		1EB113D21E81B5340049DAE3 /* FPCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FPCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1EB113D51E81B5340049DAE3 /* FPCore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FPCore.h; sourceTree = "<group>"; };
 		1EB113D61E81B5340049DAE3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -61,6 +65,7 @@
 				1E9509EE1E846A2400823C4B /* FPAuthRequest.swift */,
 				1E9509EC1E846A0700823C4B /* FPPublicPhotosRequest.swift */,
 				1E9509F31E847FEA00823C4B /* FPPrivatePhotosRequest.swift */,
+				1E9509F91E85E9D900823C4B /* FPMapPhotosRequest.swift */,
 			);
 			name = Requests;
 			sourceTree = "<group>";
@@ -101,6 +106,7 @@
 			isa = PBXGroup;
 			children = (
 				F4C08BDA1E83A65700656EF0 /* FPPhoto.swift */,
+				1E9509FB1E85F06700823C4B /* FPMapPhoto.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -188,10 +194,12 @@
 				1EB113E41E81C3390049DAE3 /* FPRequest.swift in Sources */,
 				1EB113EC1E8306AE0049DAE3 /* Config.swift in Sources */,
 				1E9509ED1E846A0700823C4B /* FPPublicPhotosRequest.swift in Sources */,
+				1E9509FC1E85F06800823C4B /* FPMapPhoto.swift in Sources */,
 				1EB113DE1E81B57F0049DAE3 /* FPCore.swift in Sources */,
 				1E9509F41E847FEA00823C4B /* FPPrivatePhotosRequest.swift in Sources */,
 				1E9509EA1E8468F400823C4B /* FPStoreToken.swift in Sources */,
 				F4C08BDB1E83A65700656EF0 /* FPPhoto.swift in Sources */,
+				1E9509FA1E85E9DA00823C4B /* FPMapPhotosRequest.swift in Sources */,
 				F4C08BD91E82CFF700656EF0 /* FPCore+Dic.swift in Sources */,
 				1E9509EF1E846A2400823C4B /* FPAuthRequest.swift in Sources */,
 			);

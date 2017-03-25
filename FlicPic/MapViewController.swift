@@ -8,6 +8,7 @@
 
 import UIKit
 import MapKit
+import FPCore
 
 class MapViewController: UIViewController {
 
@@ -57,8 +58,11 @@ extension MapViewController: MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
         print(userLocation.debugDescription)
-        
-        
+        let req = FPMapPhotoRequest(lat: userLocation.coordinate.latitude, lon: userLocation.coordinate.longitude)
+        req.exec { (err, response) in
+            let response = response as! [FPMapPhoto]
+            print(response)
+        }
     }
 }
 
