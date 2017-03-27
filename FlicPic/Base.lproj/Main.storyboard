@@ -312,13 +312,95 @@
                     </view>
                     <connections>
                         <outlet property="mapView" destination="OoD-0t-oao" id="o9f-cn-UEO"/>
+                        <outlet property="pinAnnotationView" destination="vuD-on-O14" id="OPb-gR-XtJ"/>
                         <outlet property="stepLabel" destination="sLz-ge-4Zc" id="bwC-8y-pGg"/>
                         <outlet property="stepper" destination="Sb5-gR-zst" id="okh-9a-uwx"/>
+                        <segue destination="Mnz-Eb-Li2" kind="show" identifier="imageList" id="iFb-cM-p4M"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qrw-Fc-eOM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <view contentMode="scaleToFill" id="vuD-on-O14" customClass="PinAnnotationView" customModule="FlicPic" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="0.0" width="240" height="82"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Demo" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HZn-gH-5ZD">
+                            <rect key="frame" x="0.0" y="0.0" width="240" height="21"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="HZn-gH-5ZD" secondAttribute="trailing" id="RvR-yc-DBl"/>
+                        <constraint firstItem="HZn-gH-5ZD" firstAttribute="leading" secondItem="vuD-on-O14" secondAttribute="leading" id="WcA-5D-wPT"/>
+                        <constraint firstItem="HZn-gH-5ZD" firstAttribute="top" secondItem="vuD-on-O14" secondAttribute="top" id="vAI-ew-edY"/>
+                    </constraints>
+                </view>
             </objects>
             <point key="canvasLocation" x="2029.5999999999999" y="17.541229385307346"/>
+        </scene>
+        <!--Image List Table View Controller-->
+        <scene sceneID="5tK-rg-1xM">
+            <objects>
+                <tableViewController id="Mnz-Eb-Li2" customClass="ImageListTableViewController" customModule="FlicPic" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="VuA-Ea-1gy">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleAspectFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="imageCell" rowHeight="168" id="hJ8-QN-HaO" customClass="ImageListImageTableViewCell" customModule="FlicPic" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="56" width="375" height="168"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hJ8-QN-HaO" id="7gk-Tk-n0Y">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="167"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="2B7CFC05-B7E2-443B-B6AF-F349826A764F" translatesAutoresizingMaskIntoConstraints="NO" id="gqR-FX-GYe">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="168"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="168" id="b09-k8-Q8Q"/>
+                                            </constraints>
+                                        </imageView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="gqR-FX-GYe" firstAttribute="leading" secondItem="7gk-Tk-n0Y" secondAttribute="leading" id="NO5-7z-Wwo"/>
+                                        <constraint firstItem="gqR-FX-GYe" firstAttribute="top" secondItem="7gk-Tk-n0Y" secondAttribute="top" id="jhN-lt-gSf"/>
+                                        <constraint firstAttribute="trailing" secondItem="gqR-FX-GYe" secondAttribute="trailing" id="xag-VF-8Vo"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="bigImageView" destination="gqR-FX-GYe" id="TqW-G1-cFG"/>
+                                    <segue destination="D9v-c4-rxo" kind="show" identifier="fullscreen" id="EG2-7X-Llh"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="infoCell" textLabel="Dd7-7V-MfJ" style="IBUITableViewCellStyleDefault" id="eoG-E6-GWT">
+                                <rect key="frame" x="0.0" y="224" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="eoG-E6-GWT" id="bHN-Iw-l8n">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Dd7-7V-MfJ">
+                                            <rect key="frame" x="15" y="0.0" width="345" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="Mnz-Eb-Li2" id="wOB-D5-bcB"/>
+                            <outlet property="delegate" destination="Mnz-Eb-Li2" id="78Y-cV-Uqi"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pLi-Yo-XUD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3032.8000000000002" y="50.824587706146929"/>
         </scene>
         <!--Photos Collection View Controller-->
         <scene sceneID="V8m-Vi-Srg">
@@ -355,6 +437,7 @@
                                 </constraints>
                                 <connections>
                                     <outlet property="imageView" destination="pgu-em-Lm2" id="wrb-5W-1eA"/>
+                                    <segue destination="D9v-c4-rxo" kind="show" id="cvc-ZR-tpx"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>
@@ -369,7 +452,56 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mBW-3F-cD2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1061.5999999999999" y="-656.22188905547227"/>
+            <point key="canvasLocation" x="3033" y="-717"/>
+        </scene>
+        <!--Fullscreen Image View Controller-->
+        <scene sceneID="bon-xT-fGM">
+            <objects>
+                <viewController id="D9v-c4-rxo" customClass="FullscreenImageViewController" customModule="FlicPic" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="q1d-cH-Ill"/>
+                        <viewControllerLayoutGuide type="bottom" id="2Si-tL-cbV"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ICR-nf-n6p">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5wc-gy-Plj">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZJc-5c-nMf">
+                                        <rect key="frame" x="0.0" y="-64" width="375" height="603"/>
+                                    </imageView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="ZJc-5c-nMf" secondAttribute="trailing" id="1rP-St-iup"/>
+                                    <constraint firstItem="ZJc-5c-nMf" firstAttribute="top" secondItem="5wc-gy-Plj" secondAttribute="top" id="CsW-Xw-qnR"/>
+                                    <constraint firstAttribute="bottom" secondItem="ZJc-5c-nMf" secondAttribute="bottom" id="dsD-rs-ghc"/>
+                                    <constraint firstItem="ZJc-5c-nMf" firstAttribute="centerY" secondItem="5wc-gy-Plj" secondAttribute="centerY" id="kMp-u3-ry6"/>
+                                    <constraint firstItem="ZJc-5c-nMf" firstAttribute="centerX" secondItem="5wc-gy-Plj" secondAttribute="centerX" id="tWp-y2-cdD"/>
+                                    <constraint firstItem="ZJc-5c-nMf" firstAttribute="leading" secondItem="5wc-gy-Plj" secondAttribute="leading" id="xXF-7k-uXe"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="delegate" destination="D9v-c4-rxo" id="aKS-gq-WSZ"/>
+                                </connections>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="5wc-gy-Plj" firstAttribute="leading" secondItem="ICR-nf-n6p" secondAttribute="leading" id="Tq0-Wp-8pT"/>
+                            <constraint firstAttribute="trailing" secondItem="5wc-gy-Plj" secondAttribute="trailing" id="aui-lE-4r4"/>
+                            <constraint firstItem="5wc-gy-Plj" firstAttribute="top" secondItem="q1d-cH-Ill" secondAttribute="bottom" id="rLd-mu-6cR"/>
+                            <constraint firstItem="2Si-tL-cbV" firstAttribute="top" secondItem="5wc-gy-Plj" secondAttribute="bottom" id="skO-Vh-c3P"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="imageView" destination="ZJc-5c-nMf" id="1vH-iu-oHo"/>
+                        <outlet property="scrollView" destination="5wc-gy-Plj" id="vgJ-pq-sBI"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kQL-hl-HuR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4221.6000000000004" y="-333.28335832083962"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="T6o-Wf-YiV">
@@ -390,4 +522,24 @@
             <point key="canvasLocation" x="-844" y="96.7016491754123"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="2B7CFC05-B7E2-443B-B6AF-F349826A764F" width="16" height="16">
+            <mutableData key="keyedArchiveRepresentation">
+YnBsaXN0MDDUAQIDBAUGODlYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoKwHCBEW
+GxwiIyksMjVVJG51bGzUCQoLDA0ODxBWJGNsYXNzXE5TSW1hZ2VGbGFnc1ZOU1JlcHNXTlNDb2xvcoAL
+EgTAAACAAoAJ0hIJExVaTlMub2JqZWN0c6EUgAOACNISCRcVohgZgASABYAIEAXTHQkeHyAhV05TLmJh
+c2VbTlMucmVsYXRpdmWAAIAHgAZfEHxmaWxlOi8vL0FwcGxpY2F0aW9ucy9YY29kZS5hcHAvQ29udGVu
+dHMvUGx1Z0lucy9JREVJbnRlcmZhY2VCdWlsZGVyS2l0LmlkZXBsdWdpbi9Db250ZW50cy9SZXNvdXJj
+ZXMvSUJNaXNzaW5nSW1hZ2VHbHlwaC50aWZm0iQlJidaJGNsYXNzbmFtZVgkY2xhc3Nlc1VOU1VSTKIm
+KFhOU09iamVjdNIkJSorV05TQXJyYXmiKijTLS4JLzAxV05TV2hpdGVcTlNDb2xvclNwYWNlRDAgMAAQ
+A4AK0iQlMzRXTlNDb2xvcqIzKNIkJTY3V05TSW1hZ2WiNihfEA9OU0tleWVkQXJjaGl2ZXLROjtUcm9v
+dIABAAgAEQAaACMALQAyADcARABKAFMAWgBnAG4AdgB4AH0AfwCBAIYAkQCTAJUAlwCcAJ8AoQCjAKUA
+pwCuALYAwgDEAMYAyAFHAUwBVwFgAWYBaQFyAXcBfwGCAYkBkQGeAaMBpQGnAawBtAG3AbwBxAHHAdkB
+3AHhAAAAAAAAAgEAAAAAAAAAPAAAAAAAAAAAAAAAAAAAAeM
+</mutableData>
+        </image>
+    </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="EG2-7X-Llh"/>
+    </inferredMetricsTieBreakers>
 </document>

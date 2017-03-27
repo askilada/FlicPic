@@ -11,15 +11,15 @@ import FPCore
 import PKHUD
 
 private let reuseIdentifier = "Cell"
-private let sectionInsets = UIEdgeInsets(top: 50.0, left: 10.0, bottom: 50.0, right: 10.0)
+private let sectionInsets = UIEdgeInsets(top: 50.0, left: 5.0, bottom: 50.0, right: 5.0)
 private let itemsPerRow: CGFloat = 3
 
 
 extension UIImageView {
-    func loadImageFrom(url: URL) {
+    func loadImageFrom(url: URL, withCompleationHandler compleationHandler: (() -> ())?) {
         
         let request = URLRequest(url: url, cachePolicy: .returnCacheDataElseLoad, timeoutInterval: 1200)
-        
+        self.image = nil
         URLSession.shared.dataTask(with: request) { (data, response, error) in
             if error != nil {
                 print(error!)
@@ -30,9 +30,15 @@ extension UIImageView {
                 let image =  UIImage(data: data!)
                 self.image = image
             }
+            if let compleationHandler = compleationHandler {
+                compleationHandler()
+            }
             
         }.resume()
         
+    }
+    func loadImageFrom(url: URL) {
+        self.loadImageFrom(url: url, withCompleationHandler: nil)
     }
 }
 

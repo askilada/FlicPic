@@ -19,14 +19,21 @@ class MapViewController: UIViewController {
     @IBOutlet var mapView: MKMapView!
     @IBOutlet weak var stepLabel: UILabel!
     @IBOutlet weak var stepper: UIStepper!
+    @IBOutlet weak var pinAnnotationView: PinAnnotationView!
     
+    var selectedGroup: [FPMapPhoto]?
     var locationManager: CLLocationManager!
     var locationFirstTime = true
     var pins = [MKAnnotation]()
+    var factor: Double = 100 {
+        didSet {
+            stepLabel.text = "\(factor)"
+            self.replacePins(factor: factor)
+        }
+    }
     
     @IBAction func stepperValueChanged(_ sender: UIStepper) {
-        self.replacePins(factor: sender.value)
-        stepLabel.text = "\(stepper.value)"
+        factor = sender.value
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,12 +48,43 @@ class MapViewController: UIViewController {
         } else {
             print("Location service not enabled")
         }
-        stepLabel.text = "\(stepper.value)"
+        stepLabel.text = "\(factor)"
+        stepper.value = factor
         mapView.showsUserLocation = true
         mapView.userTrackingMode = .follow
         mapView.region = MKCoordinateRegionMakeWithDistance(mapView.userLocation.coordinate, 50000, 50000)
         
         // Do any additional setup after loading the view.
+    }
+    
+    func loadImagesForLocation(_ location: CLLocationCoordinate2D) {
+        let req = FPMapPhotoRequest(lat: location.latitude, lon: location.longitude)
+        req.exec { (err, response) in
+            
+            if let err = err {
+                
+                PKHUD.sharedHUD.contentView = PKHUDErrorView(title: "Error", subtitle: "couldn't load images")
+                
+                DispatchQueue.main.async {
+                    PKHUD.sharedHUD.show()
+                    PKHUD.sharedHUD.hide(afterDelay: 2)
+                    
+                }
+                
+                return
+            }
+            let response = response as! [FPMapPhoto]
+            self.images = response
+            
+
+            self.replacePins(factor: self.factor)
+            
+            
+            
+            return
+        }
+        
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -54,20 +92,94 @@ class MapViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
 
-    /*
+    }
+
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
+    
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        print("Can do segue")
+        if identifier == "imageList" && self.selectedGroup == nil {
+            return false
+        }
+        return true
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        print("prepare segue")
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        
+        if (segue.identifier == "imageList"), let dest = segue.destination as? ImageListTableViewController {
+            print("Now showing table view controller")
+            
+            dest.images = self.selectedGroup!
+            
+        }
+        
     }
-    */
+    
 
 }
 
 extension MapViewController: MKMapViewDelegate {
+    
+    class ImageTapGesture: UITapGestureRecognizer {
+        var data: [FPMapPhoto]!
+    }
+    
+    
+    func myaction(_ sender: ImageTapGesture) {
+        self.selectedGroup = sender.data
+        self.performSegue(withIdentifier: "imageList", sender: self)
+        return
+    }
+    
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        let view = view as! MKPinAnnotationView
+        if let anotation = view.annotation as? PinAnnotation {
+            let tap = ImageTapGesture(target: self, action: #selector(myaction(_:)))
+            tap.data = anotation.data
+            view.addGestureRecognizer(tap)
+            
+        }
+        
+        
+        
+        
+        
+        
+        print("Selected annotation view: \(view.annotation!.title!)")
+    }
+    
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        
+        if annotation is MKUserLocation {
+            return nil
+        }
+        
+        var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: "Cell") as? PinAnnotationView
+        if pinView == nil {
+            pinView = PinAnnotationView(annotation: annotation, reuseIdentifier: "Cell")
+            pinView?.canShowCallout = true
+            pinView?.animatesDrop = false
+            
+            let lView = UIView()
+            lView.backgroundColor = .black
+            lView.frame = CGRect(x: 0, y: 0, width: 20, height: pinView!.frame.height)
+            pinView?.detailCalloutAccessoryView
+            
+        }
+        
+        return pinView
+    }
     
     func replacePins(factor groupFactor: Double) {
         if let images = self.images {
@@ -83,14 +195,15 @@ extension MapViewController: MKMapViewDelegate {
                 }
                 hash[mapGroup]!.append(photo)
             }
-            
-            mapView.removeAnnotations(mapView.annotations)
+            DispatchQueue.main.async {
+                self.mapView.removeAnnotations(self.mapView.annotations)
+            }
             for (key, value) in hash {
                 let location = CLLocationCoordinate2D(latitude: key.lat, longitude: key.lon)
-                let point = MKPointAnnotation()
+                let point = PinAnnotation()
                 point.title = "\(value.count) photos here"
                 point.coordinate = location
-                
+                point.data = value
                 DispatchQueue.main.async {
                     self.mapView.addAnnotation(point)
                 }
@@ -109,7 +222,7 @@ extension MapViewController: MKMapViewDelegate {
         let centerL = CLLocation(latitude: center.latitude, longitude: center.longitude)
         let edegeL = CLLocation(latitude: center.latitude + span.latitudeDelta * 0.5, longitude: center.longitude)
         
-        let dest = centerL.distance(from: edegeL)
+        self.loadImagesForLocation(center)
         
         return
         
@@ -122,32 +235,24 @@ extension MapViewController: MKMapViewDelegate {
             mapView.region = MKCoordinateRegionMakeWithDistance(userLocation.coordinate, 5000, 5000)
             self.locationFirstTime = false
         }
-        let req = FPMapPhotoRequest(lat: userLocation.coordinate.latitude, lon: userLocation.coordinate.longitude)
-        req.exec { (err, response) in
+        
+        self.loadImagesForLocation(userLocation.coordinate)
+    }
+}
+
+extension MapViewController: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if self.locationFirstTime {
             
-            if let err = err {
-                
-                PKHUD.sharedHUD.contentView = PKHUDErrorView(title: "Error", subtitle: "couldn't load images")
-                
-                DispatchQueue.main.async {
-                    PKHUD.sharedHUD.show()
-                    PKHUD.sharedHUD.hide(afterDelay: 2)
-                    
-                }
-                
-                return
-            }
-            let response = response as! [FPMapPhoto]
-            self.images = response
+            let region = MKCoordinateRegionMakeWithDistance(locations.last!.coordinate, 5000, 5000)
             
-            let groupFactor = 100.0
-            self.replacePins(factor: groupFactor)
+            mapView.region = region
             
             
-            
-            return
         }
     }
+    
+    
 }
 
 class MapGroup: Hashable, Equatable {
@@ -170,17 +275,5 @@ class MapGroup: Hashable, Equatable {
     }
 }
 
-extension MapViewController: CLLocationManagerDelegate {
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if self.locationFirstTime {
-            
-            let region = MKCoordinateRegionMakeWithDistance(locations.last!.coordinate, 5000, 5000)
-            
-            mapView.region = region
-            
-            
-        }
-    }
-    
-    
-}
+
+

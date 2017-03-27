@@ -12,7 +12,38 @@ public protocol FPModel {
     init?(json: [String: Any])
 }
 
-public class FPPhoto: FPModel {
+public protocol FPImageModel {
+    typealias FPImageResponse = (Error?, UIImage?) -> Void
+    var title: String! {get}
+    func getImageURL() -> URL
+    func getImage(type: ImageType, _ responseHandler: FPImageResponse)
+    func loadImageFromURL(_ url: URL, withResponseHandler responseHandler: @escaping FPImageResponse)
+}
+
+public extension FPImageModel {
+    func loadImageFromURL(_ url: URL, withResponseHandler responseHandler: @escaping FPImageResponse) {
+        let req = URLRequest(url: url, cachePolicy: .returnCacheDataElseLoad, timeoutInterval: 2)
+        
+        URLSession.shared.dataTask(with: req) { (data, urlresponse, error) in
+            if let error = error {
+                responseHandler(error, nil)
+                return
+            }
+            
+            let image = UIImage(data: data!)
+            responseHandler(nil, image)
+        }
+        
+    }
+}
+
+public enum ImageType {
+    case big
+    case small
+    case medium
+}
+
+public class FPPhoto: FPModel, FPImageModel {
     public private(set) var title:String!
     public private(set) var author:String!
     public private(set) var authorId:String!
@@ -72,6 +103,16 @@ public class FPPhoto: FPModel {
         
         self.title = title
     }
+    
+    public func getImageURL() -> URL {
+        return URL(string: self.media.m)!
+    }
+
+    public func getImage(type: ImageType, _ responseHandler: (Error?, UIImage?) -> Void) {
+        
+    }
+    
+    
 }
 
 public struct FPPhotoMedia {

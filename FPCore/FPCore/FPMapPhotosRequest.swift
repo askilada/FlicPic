@@ -14,6 +14,7 @@ public class FPMapPhotoRequest: FPRequest {
     public private(set) var lat: String
     public private(set) var lon: String
     public private(set) var extras: String = "date_upload,date_taken,owner_name,geo,url_sq,url_t,url_s,url_q,url_m,url_n,url_z,url_c,url_l,url_o"
+    public private(set) var media:String = "photos"
     
     public init(lat: Double, lon: Double) {
         self.lat = String(lat)

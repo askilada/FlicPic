@@ -9,12 +9,15 @@
 import Foundation
 
 
-public class FPMapPhoto: FPModel {
-    public private(set) var title: String
+public class FPMapPhoto: FPModel, FPImageModel {
+    public private(set) var title: String!
     public private(set) var imageUrl: String
     public private(set) var lat: Double
     public private(set) var lon: Double
     public private(set) var owner: String
+    public private(set) var bigImageUrl: String?
+    public private(set) var mediumImageUrl: String?
+    public private(set) var smallImageUrl: String?
     
     public init?(title: String, imageUrl: String, lat: Double, lon: Double, owner: String) {
         self.title = title
@@ -30,6 +33,10 @@ public class FPMapPhoto: FPModel {
             , let owner = json["ownername"] as? String else {
                 return nil
         }
+        
+        self.bigImageUrl = json["url_l"] as? String
+        self.mediumImageUrl = json["url_m"] as? String
+        self.smallImageUrl = json["url_s"] as? String
         
         // Latitude
         if let lat = json["latitude"] as? Double {
@@ -53,4 +60,47 @@ public class FPMapPhoto: FPModel {
         self.imageUrl = imageUrl
         self.owner = owner
     }
+    
+    public func getImageURL() -> URL {
+        return URL(string: self.imageUrl)!
+    }
+    
+    public func getImage(type: ImageType, _ responseHandler: @escaping FPImageModel.FPImageResponse) {
+        var imageURLStr: String!
+        switch type {
+        case .big:
+            if let big = self.bigImageUrl {
+                imageURLStr = big
+            } else {
+                self.getImage(type: .medium, responseHandler)
+                return
+            }
+            break;
+        case .medium:
+            if let med = self.mediumImageUrl {
+                imageURLStr = med
+            } else {
+                self.getImage(type: .small, responseHandler)
+                return
+            }
+            break
+        case .small:
+            if let small = self.smallImageUrl {
+                imageURLStr = small
+            } else {
+                responseHandler(FPRequestError.InternalError, nil)
+                return
+            }
+            break;
+        }
+        
+        let url = URL(string: imageURLStr)!
+        
+        loadImageFromURL(url, withResponseHandler: responseHandler)
+        return
+    
+    }
+    
+
+    
 }
