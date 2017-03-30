@@ -61,7 +61,7 @@ class MapViewController: UIViewController {
         let req = FPMapPhotoRequest(lat: location.latitude, lon: location.longitude)
         req.exec { (err, response) in
             
-            if let err = err {
+            if let _ = err {
                 
                 PKHUD.sharedHUD.contentView = PKHUDErrorView(title: "Error", subtitle: "couldn't load images")
                 
@@ -150,13 +150,6 @@ extension MapViewController: MKMapViewDelegate {
             view.addGestureRecognizer(tap)
             
         }
-        
-        
-        
-        
-        
-        
-        print("Selected annotation view: \(view.annotation!.title!)")
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
@@ -174,7 +167,7 @@ extension MapViewController: MKMapViewDelegate {
             let lView = UIView()
             lView.backgroundColor = .black
             lView.frame = CGRect(x: 0, y: 0, width: 20, height: pinView!.frame.height)
-            pinView?.detailCalloutAccessoryView
+            
             
         }
         
@@ -216,12 +209,12 @@ extension MapViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
         print("Region changed")
         
-        let span = mapView.region.span
         let center = mapView.region.center
         
+        /*
         let centerL = CLLocation(latitude: center.latitude, longitude: center.longitude)
         let edegeL = CLLocation(latitude: center.latitude + span.latitudeDelta * 0.5, longitude: center.longitude)
-        
+        */
         self.loadImagesForLocation(center)
         
         return

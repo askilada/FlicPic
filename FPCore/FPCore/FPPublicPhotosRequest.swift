@@ -40,7 +40,7 @@ public class FPPublicPhotosRequest: FPRequest {
         
         print(p)
         
-        return p as! Any?
+        return p as Any?
         
     }
     

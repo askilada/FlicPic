@@ -39,7 +39,7 @@ public class FPRequest: FPRequestable {
     
     public subscript (key:String) -> String {
         get {
-            return self.params[key]! as! String
+            return self.params[key]! 
         }
         set {
             self.params[key] = newValue
@@ -85,7 +85,7 @@ public class FPRequest: FPRequestable {
         }
         
         print(stringToSign)
-        var signed = FPCore.shared.sign.make(input: stringToSign)
+        let signed = FPCore.shared.sign.make(input: stringToSign)
         print(signed)
         finalQuery.append("api_sig=\(signed)")
         let query = finalQuery.joined(separator: "&")
@@ -101,14 +101,13 @@ public class FPRequest: FPRequestable {
         let url = URL(string: "\(self.endpoint)?\(query)")!
         print(url)
         
-        var request = URLRequest(url: url)
+        let request = URLRequest(url: url)
         
         
         let task = URLSession.shared.dataTask(with: request) { (data, urlresponse, err) in
             if err != nil {
                 return response(err, nil)
             }
-            let httpResponse = urlresponse as! HTTPURLResponse
             
             
             

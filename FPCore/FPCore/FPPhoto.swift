@@ -159,7 +159,6 @@ public class FPPhoto: FPModel, FPImageModel {
             return nil
         }
 
-        print(json["url_l"] as? String)
         
         self.title = title
     }

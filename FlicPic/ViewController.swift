@@ -16,6 +16,10 @@ class ViewController: UIViewController {
     @IBOutlet var loginView: UIView!
     @IBOutlet var logoutView: UIView!
     @IBOutlet var usernameLabel: UILabel!
+    @IBOutlet var tableView: UITableView!
+    
+    var activities: [FPUserActivity] = [FPUserActivity]()
+    
     
     var loggedIn: Bool = false
     
@@ -67,9 +71,11 @@ class ViewController: UIViewController {
         if self.loggedIn {
             self.loginView.isHidden = true
             self.logoutView.isHidden = false
+            self.tableView.isHidden = false
         } else {
             self.loginView.isHidden = false
             self.logoutView.isHidden = true
+            self.tableView.isHidden = true
         }
     }
 
@@ -100,4 +106,26 @@ class ViewController: UIViewController {
 
 
 }
+
+extension ViewController: UITableViewDataSource, UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.activities.count
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ActivityIdent", for: indexPath)
+        
+        
+        return cell
+        
+    }
+}
+
+
 
