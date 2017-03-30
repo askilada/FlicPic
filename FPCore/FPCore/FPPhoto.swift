@@ -14,10 +14,18 @@ public protocol FPModel {
 
 public protocol FPImageModel {
     typealias FPImageResponse = (Error?, UIImage?) -> Void
-    var title: String! {get}
     func getImageURL() -> URL
-    func getImage(type: ImageType, _ responseHandler: FPImageResponse)
+    func getImage(type: ImageType, _ responseHandler: @escaping FPImageResponse)
     func loadImageFromURL(_ url: URL, withResponseHandler responseHandler: @escaping FPImageResponse)
+    
+    var title:String {get}
+    var author:String {get}
+    var authorId:String {get}
+    
+    var bigImageUrl: String? {get}
+    var mediumImageUrl: String? {get}
+    var smallImageUrl: String? {get}
+
 }
 
 public extension FPImageModel {
@@ -32,7 +40,52 @@ public extension FPImageModel {
             
             let image = UIImage(data: data!)
             responseHandler(nil, image)
+        }.resume()
+        
+    }
+    
+    public func getImage(type: ImageType, _ responseHandler: @escaping (Error?, UIImage?) -> Void) {
+        var imageURLStr: String!
+        switch type {
+        case .big:
+            if let big = self.bigImageUrl {
+                imageURLStr = big
+            } else {
+                self.getImage(type: .medium, responseHandler)
+                return
+            }
+            break;
+        case .medium:
+            if let med = self.mediumImageUrl {
+                imageURLStr = med
+            } else {
+                self.getImage(type: .small, responseHandler)
+                return
+            }
+            break
+        case .small:
+            if let small = self.smallImageUrl {
+                imageURLStr = small
+            } else {
+                responseHandler(FPPhotoError.noPhotoFound, nil)
+                return
+            }
+            break;
         }
+        
+        print("Image loaded: ")
+        print(type)
+        
+        
+        if let url = URL(string: imageURLStr) {
+            loadImageFromURL(url, withResponseHandler: responseHandler)
+            return
+        }
+        
+        
+        responseHandler(FPPhotoError.noPhotoFound, nil)
+        
+        return
         
     }
 }
@@ -43,33 +96,40 @@ public enum ImageType {
     case medium
 }
 
+public enum FPPhotoError: Error {
+    case noPhotoFound
+    case createError
+}
+
 public class FPPhoto: FPModel, FPImageModel {
-    public private(set) var title:String!
-    public private(set) var author:String!
-    public private(set) var authorId:String!
+    public private(set) var title: String
+    public private(set) var author: String
+    public private(set) var authorId: String
+
+
     public private(set) var dateTaken:String!
     public private(set) var published: String!
-    public private(set) var media: FPPhotoMedia!
+    
+    public private(set) var bigImageUrl: String?
+    public private(set) var mediumImageUrl: String?
+    public private(set) var smallImageUrl: String?
     
     public required init?(json: [String: Any]) {
         guard let title = json["title"] as? String else {
             return nil
         }
         
-        // Media part
-        if let media = json["media"] as? [String: Any] {
-            self.media = FPPhotoMedia(json: media)
-        } else if let media = json["url_s"] as? String {
-            self.media = FPPhotoMedia(json: ["m": media])
-        } else {
-            return nil
-        }
+        self.smallImageUrl = json["url_s"] as? String
+        self.mediumImageUrl = json["url_m"] as? String
+        self.bigImageUrl = json["url_l"] as? String
         
         // Author part
         if let author = json["author"] as? String {
             self.author = author
         } else if let author = json["ownername"] as? String {
             self.author = author
+        } else {
+            return nil
         }
         
         // Author Id
@@ -105,11 +165,7 @@ public class FPPhoto: FPModel, FPImageModel {
     }
     
     public func getImageURL() -> URL {
-        return URL(string: self.media.m)!
-    }
-
-    public func getImage(type: ImageType, _ responseHandler: (Error?, UIImage?) -> Void) {
-        
+        return URL(string: self.mediumImageUrl!)!
     }
     
     

@@ -20,7 +20,21 @@ class FullscreenImageViewController: UIViewController, UIScrollViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        imageView.loadImageFrom(url: image.getImageURL())
+        image.getImage(type: .big) { (error, image) in
+            
+            if error != nil {
+                // TODO: display some error message
+                return
+            }
+            
+            DispatchQueue.main.async {
+                self.imageView.image = image
+            }
+            
+            
+            
+        }
+        
         
         
         self.scrollView.minimumZoomScale = 1.0

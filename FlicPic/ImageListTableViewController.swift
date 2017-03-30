@@ -50,25 +50,19 @@ class ImageListTableViewController: UITableViewController {
             // image view
             let c = tableView.dequeueReusableCell(withIdentifier: "imageCell", for: indexPath) as! ImageListImageTableViewCell
             
-            let imgUrl = data.getImageURL()
-            
             c.bigImageView.image = nil
-            
-            var req = URLRequest(url: imgUrl)
-            req.cachePolicy = .returnCacheDataDontLoad
-            
-            URLSession.shared.dataTask(with: req, completionHandler: { (data, urlresponse, error) in
+            data.getImage(type: .medium, { (error, image) in
                 
                 if error != nil {
+                    //TODO: make error message
                     return
                 }
                 DispatchQueue.main.async {
-                    c.bigImageView.image = UIImage(data: data!)
-                    c.bigImageView.setNeedsLayout()                    
+                    c.bigImageView.image = image!
                 }
                 
                 
-            }).resume()
+            })
             
             
             

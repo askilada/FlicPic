@@ -9,29 +9,38 @@
 import Foundation
 
 public class FPPublicPhotosRequest: FPRequest {
+    let media = "photos"
+    let extras = "url_sq,url_t,url_s,url_q,url_m,url_n,url_z,url_c,url_l,url_o,owner_name,date_taken,date_upload"
+    
     public override init()
     {
         super.init()
         
-        self.endpoint = "https://api.flickr.com/services/feeds/photos_public.gne"
+        self.method = "flickr.photos.search"
     }
     
     override func requestResponse(jsonObject: [String : Any]) throws -> (Any?) {
         print("Response json public")
         
-        let items = jsonObject["items"] as! [[String: Any]]
+        guard let data = jsonObject["photos"] as? [String: Any]
+        , let photos = data["photo"] as? [[String: Any]] else {
+            
+            throw FPPhotoError.createError
+        }
         
-        var photos: [FPPhoto] = []
-        for item in items {
+        
+        
+        var p: [FPPhoto] = []
+        for item in photos {
             if let photo = FPPhoto(json: item) {
-                photos.append(photo)
+                p.append(photo)
             }
             
         }
         
-        print(photos)
+        print(p)
         
-        return photos as! Any?
+        return p as! Any?
         
     }
     

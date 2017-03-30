@@ -52,6 +52,19 @@ class PhotosCollectionViewController: UICollectionViewController {
     var photos: [FPPhoto] = []
     
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if let selectedIndexPaths = self.collectionView?.indexPathsForSelectedItems
+            , let indexPath = selectedIndexPaths.first {
+            
+            let photo = photos[indexPath.row]
+            let dest = segue.destination as! FullscreenImageViewController
+            dest.image = photo
+            
+            
+        }
+        
+    }
     
     
     func loadImages(ofType type: PhotosToLoad) {
@@ -157,13 +170,22 @@ class PhotosCollectionViewController: UICollectionViewController {
         // Configure the cell
         let index = indexPath.row
         let photo = photos[index]
-        
-        let url = URL(string: photo.media.m)!
-        cell.imageView.loadImageFrom(url: url)
+        cell.imageView.image = nil
+        photo.getImage(type: .medium) { (error, image) in
+            if error != nil {
+                //TODO: Something with error handling
+                return
+            }
+            
+            DispatchQueue.main.async {
+                cell.imageView.image = image
+            }
+        }
     
         return cell
     }
-
+    
+    /*
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         //TODO: Maybe load bigger image in future
         
@@ -183,7 +205,8 @@ class PhotosCollectionViewController: UICollectionViewController {
         self.view.addSubview(imageView)
         
     }
-    
+     */   
+ 
     func dismissImageView(sender: UITapGestureRecognizer) {
         sender.view?.removeFromSuperview()
     }
