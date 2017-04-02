@@ -24,6 +24,7 @@ You also need to change the URL which the user should be redirected to, for bein
 Before you cen run this project you need to download all git submobules by running this command in your terminal:
 
 ```
+git submodule init
 git submodule update
 ```
 
