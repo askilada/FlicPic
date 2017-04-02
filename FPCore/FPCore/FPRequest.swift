@@ -93,6 +93,21 @@ public class FPRequest: FPRequestable {
         return query
     }
     
+    func generateSign(params: Params) -> String {
+        let sorted = params.sorted(by: {$0.0 < $1.0})
+        
+        
+        var stringToSign = self.secret
+        for (key, value) in sorted {
+            stringToSign.append("\(key)\(value)")
+        }
+        print("Str to sign:")
+        print(stringToSign)
+        let sign = FPCore.shared.sign.make(input: stringToSign)
+        
+        return sign
+    }
+    
     public func exec(response: @escaping FPResponseHandler) {
         
         let params = makeParams()

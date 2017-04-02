@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1E84BD211E912C25004CE7C0 /* FPUploadImageRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E84BD201E912C25004CE7C0 /* FPUploadImageRequest.swift */; };
 		1E9509EA1E8468F400823C4B /* FPStoreToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9509E91E8468F400823C4B /* FPStoreToken.swift */; };
 		1E9509ED1E846A0700823C4B /* FPPublicPhotosRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9509EC1E846A0700823C4B /* FPPublicPhotosRequest.swift */; };
 		1E9509EF1E846A2400823C4B /* FPAuthRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9509EE1E846A2400823C4B /* FPAuthRequest.swift */; };
@@ -25,6 +26,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1E84BD201E912C25004CE7C0 /* FPUploadImageRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FPUploadImageRequest.swift; sourceTree = "<group>"; };
 		1E9509E91E8468F400823C4B /* FPStoreToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FPStoreToken.swift; sourceTree = "<group>"; };
 		1E9509EC1E846A0700823C4B /* FPPublicPhotosRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FPPublicPhotosRequest.swift; sourceTree = "<group>"; };
 		1E9509EE1E846A2400823C4B /* FPAuthRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FPAuthRequest.swift; sourceTree = "<group>"; };
@@ -73,6 +75,7 @@
 				1E9509F31E847FEA00823C4B /* FPPrivatePhotosRequest.swift */,
 				1E9509F91E85E9D900823C4B /* FPMapPhotosRequest.swift */,
 				F4E7C87D1E8CCD710002733E /* FPActivityRequest.swift */,
+				1E84BD201E912C25004CE7C0 /* FPUploadImageRequest.swift */,
 			);
 			name = Requests;
 			sourceTree = "<group>";
@@ -219,6 +222,7 @@
 			files = (
 				1EB113E41E81C3390049DAE3 /* FPRequest.swift in Sources */,
 				1EB113EC1E8306AE0049DAE3 /* Config.swift in Sources */,
+				1E84BD211E912C25004CE7C0 /* FPUploadImageRequest.swift in Sources */,
 				F4E7C87E1E8CCD710002733E /* FPActivityRequest.swift in Sources */,
 				F4E7C8801E8CCE6E0002733E /* FPUserActivity.swift in Sources */,
 				1E9509ED1E846A0700823C4B /* FPPublicPhotosRequest.swift in Sources */,

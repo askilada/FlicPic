@@ -13,6 +13,10 @@
 		1E6101461E89680C00FC6B94 /* FullscreenImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E6101451E89680C00FC6B94 /* FullscreenImageViewController.swift */; };
 		1E84BD191E910958004CE7C0 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E84BD181E910958004CE7C0 /* LoginViewController.swift */; };
 		1E84BD1B1E910A1B004CE7C0 /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E84BD1A1E910A1B004CE7C0 /* UserProfileViewController.swift */; };
+		1E84BD1D1E9121DD004CE7C0 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E84BD1C1E9121DD004CE7C0 /* AssetsLibrary.framework */; };
+		1E84BD1F1E912375004CE7C0 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E84BD1E1E912375004CE7C0 /* Photos.framework */; };
+		1E84BD241E913D9D004CE7C0 /* PKHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E84BD231E913D9D004CE7C0 /* PKHUD.framework */; };
+		1E84BD251E913D9D004CE7C0 /* PKHUD.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1E84BD231E913D9D004CE7C0 /* PKHUD.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1E9509E71E8455FB00823C4B /* PhotosCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9509E61E8455FB00823C4B /* PhotosCollectionViewCell.swift */; };
 		1E9509F21E84717A00823C4B /* PKHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E9509F11E84717A00823C4B /* PKHUD.framework */; };
 		1E9509F61E85DE7E00823C4B /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E9509F51E85DE7E00823C4B /* MapKit.framework */; };
@@ -48,6 +52,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				1EB113E11E81B69E0049DAE3 /* FPCore.framework in Embed Frameworks */,
+				1E84BD251E913D9D004CE7C0 /* PKHUD.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -61,6 +66,9 @@
 		1E6101451E89680C00FC6B94 /* FullscreenImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullscreenImageViewController.swift; sourceTree = "<group>"; };
 		1E84BD181E910958004CE7C0 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		1E84BD1A1E910A1B004CE7C0 /* UserProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
+		1E84BD1C1E9121DD004CE7C0 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
+		1E84BD1E1E912375004CE7C0 /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
+		1E84BD231E913D9D004CE7C0 /* PKHUD.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = PKHUD.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E9509E61E8455FB00823C4B /* PhotosCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotosCollectionViewCell.swift; sourceTree = "<group>"; };
 		1E9509F11E84717A00823C4B /* PKHUD.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PKHUD.framework; path = "PKHUD/build/Debug-iphoneos/PKHUD.framework"; sourceTree = "<group>"; };
 		1E9509F51E85DE7E00823C4B /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
@@ -87,7 +95,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1E84BD1F1E912375004CE7C0 /* Photos.framework in Frameworks */,
+				1E84BD1D1E9121DD004CE7C0 /* AssetsLibrary.framework in Frameworks */,
 				1E9509F61E85DE7E00823C4B /* MapKit.framework in Frameworks */,
+				1E84BD241E913D9D004CE7C0 /* PKHUD.framework in Frameworks */,
 				1E9509F21E84717A00823C4B /* PKHUD.framework in Frameworks */,
 				1EB113E01E81B69E0049DAE3 /* FPCore.framework in Frameworks */,
 			);
@@ -106,6 +117,8 @@
 		1E9509F01E84717A00823C4B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1E84BD1E1E912375004CE7C0 /* Photos.framework */,
+				1E84BD1C1E9121DD004CE7C0 /* AssetsLibrary.framework */,
 				1E9509F51E85DE7E00823C4B /* MapKit.framework */,
 				1E9509F11E84717A00823C4B /* PKHUD.framework */,
 			);
@@ -124,6 +137,7 @@
 		F4741CB41E8186280044946A = {
 			isa = PBXGroup;
 			children = (
+				1E84BD231E913D9D004CE7C0 /* PKHUD.framework */,
 				1EB113DF1E81B69E0049DAE3 /* FPCore.framework */,
 				F4741CBF1E8186290044946A /* FlicPic */,
 				F4741CD41E8186290044946A /* FlicPicTests */,
@@ -234,6 +248,7 @@
 				TargetAttributes = {
 					F4741CBC1E8186290044946A = {
 						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = 3U2VDYD358;
 						ProvisioningStyle = Automatic;
 					};
 					F4741CD01E8186290044946A = {
@@ -454,6 +469,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 3U2VDYD358;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/PKHUD/build/Debug-iphoneos",
@@ -471,6 +487,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 3U2VDYD358;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/PKHUD/build/Debug-iphoneos",

@@ -9,6 +9,7 @@
 import UIKit
 import FPCore
 import PKHUD
+import Photos
 
 private let reuseIdentifier = "Cell"
 private let sectionInsets = UIEdgeInsets(top: 50.0, left: 5.0, bottom: 50.0, right: 5.0)
@@ -49,8 +50,28 @@ enum PhotosToLoad {
 }
 
 class PhotosCollectionViewController: UICollectionViewController {
-    var photos: [FPPhoto] = []
     
+    @IBAction func pickImage(_ sender: Any?) {
+        
+        let imagePickerView = UIImagePickerController()
+        imagePickerView.delegate = self
+
+        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+            imagePickerView.sourceType = .camera
+            imagePickerView.mediaTypes = UIImagePickerController.availableMediaTypes(for: .camera)!
+        } else {
+            imagePickerView.sourceType = .photoLibrary
+            imagePickerView.mediaTypes = UIImagePickerController.availableMediaTypes(for: .photoLibrary)!
+        }
+        
+        
+        
+        present(imagePickerView, animated: true, completion: nil)
+        
+        
+    }
+    
+    var photos: [FPPhoto] = []
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
@@ -72,6 +93,7 @@ class PhotosCollectionViewController: UICollectionViewController {
         switch type {
         case .Public:
             self.navigationItem.title = "Public images"
+            self.navigationItem.rightBarButtonItem?.isEnabled = false
             request = FPPublicPhotosRequest()
             break
         case .Private:
@@ -232,3 +254,45 @@ extension PhotosCollectionViewController: UICollectionViewDelegateFlowLayout {
         
     }
 }
+
+extension PhotosCollectionViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        print("Image selected")
+        
+        if let selectedImage = info["UIImagePickerControllerOriginalImage"] as? UIImage {
+            let req = FPUploadImageRequest(image: selectedImage)
+            
+            
+            PKHUD.sharedHUD.contentView = PKHUDProgressView(title: "Uploading", subtitle: "Please wait...")
+            PKHUD.sharedHUD.show()
+            req.exec { (err, res) in
+                if err != nil {
+                    DispatchQueue.main.async {
+                        PKHUD.sharedHUD.contentView = PKHUDErrorView(title: "Error", subtitle: "Something went wrong")
+                        PKHUD.sharedHUD.hide(afterDelay: 2)
+                    }
+                    return
+                }
+                
+                self.loadImages(ofType: .Private)
+                
+                DispatchQueue.main.async {
+                    picker.dismiss(animated: true, completion: nil)
+                    
+                }
+                
+            }
+        }
+        
+        
+        
+        
+        
+        
+    }
+    
+    
+    
+    
+}
+
