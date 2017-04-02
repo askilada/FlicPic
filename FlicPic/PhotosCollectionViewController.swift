@@ -71,9 +71,11 @@ class PhotosCollectionViewController: UICollectionViewController {
         let request: FPRequest
         switch type {
         case .Public:
+            self.navigationItem.title = "Public images"
             request = FPPublicPhotosRequest()
             break
         case .Private:
+            self.navigationItem.title = "Private images"
             request = FPPrivatePhotosRequest()
             break
         }
@@ -85,7 +87,7 @@ class PhotosCollectionViewController: UICollectionViewController {
                 DispatchQueue.main.async {
                     PKHUD.sharedHUD.contentView = PKHUDErrorView(title: "Error", subtitle: "An error had happend")
                     PKHUD.sharedHUD.hide(afterDelay: 2)
-                    self.navigationController?.popViewController(animated: true)
+                    let _ = self.navigationController?.popViewController(animated: true)
                 }
                 return
             }
@@ -102,33 +104,7 @@ class PhotosCollectionViewController: UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        /*
-        let req = FPPublicPhotosRequest()
-        PKHUD.sharedHUD.contentView = PKHUDProgressView()
-        PKHUD.sharedHUD.show()
-        req.exec { (err, photos) in
-            
-            if err != nil {
-                DispatchQueue.main.async {
-                    PKHUD.sharedHUD.contentView = PKHUDErrorView(title: "Error", subtitle: "An error had happend")
-                    PKHUD.sharedHUD.hide(afterDelay: 2)
-                }
-                return
-            }
-            
-            
-            let photos = photos as? [FPPhoto]
-            self.photos = photos!
-            
-            DispatchQueue.main.async {
-                PKHUD.sharedHUD.hide()
-                self.collectionView?.reloadData()
-            }
-            
-        } 
-        
-        */
+
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false

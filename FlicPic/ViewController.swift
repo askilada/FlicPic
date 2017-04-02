@@ -17,6 +17,7 @@ class ViewController: UIViewController {
     @IBOutlet var logoutView: UIView!
     @IBOutlet var usernameLabel: UILabel!
     @IBOutlet var tableView: UITableView!
+    @IBOutlet var bView: UIView!
     
     var activities: [FPUserActivity] = [FPUserActivity]()
     
@@ -96,6 +97,60 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        let popOver = UIView()
+        popOver.layer.cornerRadius = 20
+        popOver.backgroundColor = UIColor(white: 0, alpha: 0.5)
+        
+        let label = UILabel()
+        label.text = "Hello World"
+
+        
+        
+        
+        let frame = CGRect(x: 0, y: 0, width: popOver.layer.frame.width, height: popOver.layer.frame.height)
+        //let frame = view.frame
+        
+        let effect = UIVisualEffectView(frame: frame)
+        effect.effect = UIBlurEffect(style: .dark)
+        
+        
+        
+        popOver.addSubview(effect)
+        
+        self.view.addSubview(popOver)
+        
+        /*
+        let centerXConst = NSLayoutConstraint(item: popOver, attribute: .centerX, relatedBy: .equal, toItem: self.tableView, attribute: .centerX, multiplier: 1, constant: 0)
+        let centerYConst = NSLayoutConstraint(item: popOver, attribute: .centerY, relatedBy: .equal, toItem: self.tableView, attribute: .centerY, multiplier: 1, constant: 0)
+        let leftConst = NSLayoutConstraint(item: popOver, attribute: .leading, relatedBy: <#T##NSLayoutRelation#>, toItem: <#T##Any?#>, attribute: <#T##NSLayoutAttribute#>, multiplier: <#T##CGFloat#>, constant: <#T##CGFloat#>)
+        */
+        
+        popOver.leadingAnchor.constraint(equalTo: tableView.leadingAnchor, constant: 1).isActive = true
+        popOver.trailingAnchor.constraint(equalTo: tableView.trailingAnchor, constant: 1).isActive = true
+        popOver.topAnchor.constraint(equalTo: tableView.topAnchor, constant: 1).isActive = true
+        popOver.bottomAnchor.constraint(equalTo: tableView.bottomAnchor, constant: 1).isActive = true
+        
+        let req = FPActivityRequest()
+        req.exec { (error, userActivities) in
+            if error != nil {
+                // TODO make some error message
+                return
+            }
+            
+            
+            
+            
+            
+            if let userActivities = userActivities as? [FPUserActivity] {
+                self.activities = userActivities
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+            }
+            
+        }
     }
     
 
@@ -118,8 +173,10 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         let cell = tableView.dequeueReusableCell(withIdentifier: "ActivityIdent", for: indexPath)
+        let activity = self.activities[indexPath.row]
+        
+        cell.textLabel?.text = activity.title
         
         
         return cell

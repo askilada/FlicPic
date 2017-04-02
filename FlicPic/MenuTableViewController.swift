@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FPCore
 
 class MenuTableViewController: UITableViewController {
 
@@ -44,5 +45,19 @@ class MenuTableViewController: UITableViewController {
         // Pass the selected object to the new view controller.
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+       
+        let cell = tableView.cellForRow(at: indexPath)
+        if cell?.reuseIdentifier == "myProfile" {
+            if FPCore.shared.token == nil {
+                let loginView = storyboard?.instantiateViewController(withIdentifier: "LoginViewIdentifier") as! LoginViewController
+                self.show(loginView, sender: self)
+            } else {
+                let userView = storyboard?.instantiateViewController(withIdentifier: "UserProfileViewIdentifier") as! UserProfileViewController
+                self.show(userView, sender: self)
+            }
+        }
+        
+    }
 
 }

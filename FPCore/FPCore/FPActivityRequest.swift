@@ -11,7 +11,10 @@ import Foundation
 
 public class FPActivityRequest: FPRequest {
     
-    
+    public override init() {
+        super.init()
+        self.method = "flickr.activity.userPhotos"
+    }
     
     
     public override func requestResponse(jsonObject: [String : Any]) throws -> (Any?) {

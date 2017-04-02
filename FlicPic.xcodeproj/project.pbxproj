@@ -11,6 +11,8 @@
 		1E21E6451E893EE800617FB1 /* ImageListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E21E6441E893EE800617FB1 /* ImageListTableViewController.swift */; };
 		1E6101441E895B8100FC6B94 /* ImageListImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E6101431E895B8100FC6B94 /* ImageListImageTableViewCell.swift */; };
 		1E6101461E89680C00FC6B94 /* FullscreenImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E6101451E89680C00FC6B94 /* FullscreenImageViewController.swift */; };
+		1E84BD191E910958004CE7C0 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E84BD181E910958004CE7C0 /* LoginViewController.swift */; };
+		1E84BD1B1E910A1B004CE7C0 /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E84BD1A1E910A1B004CE7C0 /* UserProfileViewController.swift */; };
 		1E9509E71E8455FB00823C4B /* PhotosCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E9509E61E8455FB00823C4B /* PhotosCollectionViewCell.swift */; };
 		1E9509F21E84717A00823C4B /* PKHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E9509F11E84717A00823C4B /* PKHUD.framework */; };
 		1E9509F61E85DE7E00823C4B /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E9509F51E85DE7E00823C4B /* MapKit.framework */; };
@@ -57,6 +59,8 @@
 		1E21E6441E893EE800617FB1 /* ImageListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageListTableViewController.swift; sourceTree = "<group>"; };
 		1E6101431E895B8100FC6B94 /* ImageListImageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageListImageTableViewCell.swift; sourceTree = "<group>"; };
 		1E6101451E89680C00FC6B94 /* FullscreenImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullscreenImageViewController.swift; sourceTree = "<group>"; };
+		1E84BD181E910958004CE7C0 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		1E84BD1A1E910A1B004CE7C0 /* UserProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
 		1E9509E61E8455FB00823C4B /* PhotosCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotosCollectionViewCell.swift; sourceTree = "<group>"; };
 		1E9509F11E84717A00823C4B /* PKHUD.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PKHUD.framework; path = "PKHUD/build/Debug-iphoneos/PKHUD.framework"; sourceTree = "<group>"; };
 		1E9509F51E85DE7E00823C4B /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
@@ -172,6 +176,8 @@
 				1E21E6421E86D3E800617FB1 /* PinAnnotationView.swift */,
 				1E21E6441E893EE800617FB1 /* ImageListTableViewController.swift */,
 				1E6101431E895B8100FC6B94 /* ImageListImageTableViewCell.swift */,
+				1E84BD181E910958004CE7C0 /* LoginViewController.swift */,
+				1E84BD1A1E910A1B004CE7C0 /* UserProfileViewController.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -297,6 +303,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1E84BD191E910958004CE7C0 /* LoginViewController.swift in Sources */,
 				1E21E6451E893EE800617FB1 /* ImageListTableViewController.swift in Sources */,
 				1EB113E91E82FCC20049DAE3 /* MD5Sign.swift in Sources */,
 				1E9509E71E8455FB00823C4B /* PhotosCollectionViewCell.swift in Sources */,
@@ -304,6 +311,7 @@
 				F4774F521E856C6D00C41DDE /* MenuTableViewController.swift in Sources */,
 				F4741CC31E8186290044946A /* ViewController.swift in Sources */,
 				F4741CC11E8186290044946A /* AppDelegate.swift in Sources */,
+				1E84BD1B1E910A1B004CE7C0 /* UserProfileViewController.swift in Sources */,
 				F4991FB91E8425080028414C /* PhotosCollectionViewController.swift in Sources */,
 				1E9509F81E85DF0300823C4B /* MapViewController.swift in Sources */,
 				1E6101461E89680C00FC6B94 /* FullscreenImageViewController.swift in Sources */,
